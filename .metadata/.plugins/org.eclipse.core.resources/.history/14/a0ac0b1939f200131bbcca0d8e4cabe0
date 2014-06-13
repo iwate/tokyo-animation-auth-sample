@@ -1,0 +1,9 @@
+package com.tokyoanimation.models;
+
+public class Client {
+	private String serverUrl;
+	private String token;
+	private String tokenType;
+	
+	public Client(){}
+}

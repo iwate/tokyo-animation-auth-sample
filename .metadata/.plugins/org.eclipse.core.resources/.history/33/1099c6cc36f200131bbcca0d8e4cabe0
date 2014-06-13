@@ -1,0 +1,31 @@
+package com.tokyoanimation.models;
+
+import com.tokyoanimation.app.R;
+
+import android.app.Activity;
+import android.net.Uri;
+import android.os.Bundle;
+import android.util.Log;
+
+public class CallbackActivity extends Activity {
+	private final String TAG = "Callback";
+	@Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        
+        Uri uri = getIntent().getData();
+        
+        if(uri != null && uri.toString().startsWith("Callback://CallBackActivity")){
+            //oauth_verifier‚ðŽæ“¾‚·‚é
+            String accessToken = uri.getQueryParameter("access_token");
+            String tokenType = uri.getQueryParameter("token_type");
+            String expiresIn = uri.getQueryParameter("expires_in");
+            String state = uri.getQueryParameter("state");
+            Log.d(TAG, "access toke: " + accessToken);
+            Log.d(TAG, "token type: " + tokenType);
+            Log.d(TAG, "expires in: " + expiresIn);
+            Log.d(TAG, "state: " + state);
+        }
+
+    }
+}

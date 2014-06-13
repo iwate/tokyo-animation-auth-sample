@@ -1,0 +1,7 @@
+INDEX VERSION 1.126+C:\Users\éúçs\Documents\Android\TOKYOAnimation\.metadata\.plugins\org.eclipse.jdt.core
+1596472371.index
+2813902626.index
+1284074322.index
+2096951434.index
+2392558033.index
+4181912605.index

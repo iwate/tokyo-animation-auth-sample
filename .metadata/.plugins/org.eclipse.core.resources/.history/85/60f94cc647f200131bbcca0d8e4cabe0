@@ -1,0 +1,69 @@
+package com.tokyoanimation.models;
+
+import java.io.IOException;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.HttpStatus;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.ResponseHandler;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.util.EntityUtils;
+
+import android.net.Uri;
+import android.util.Log;
+
+public class Client {
+	private final String SCHEME = "http";
+	private final String HOST = "tokyo-animation.azurewebsites.net";
+	private String token;
+	private String tokenType;
+	
+	public Client(){}
+	
+	private void Get(String controller, String action){
+		Uri.Builder builder = new Uri.Builder();
+		builder.scheme(SCHEME);
+		builder.encodedAuthority(HOST);
+	}
+	
+	public void loginWithFacebook(){
+		Uri.Builder builder = new Uri.Builder();
+		builder.scheme(SCHEME);
+		builder.encodedAuthority(HOST);
+		builder.path("/api/account/ExternalLogins");
+		builder.appendQueryParameter("returnUrl", "Callback://CallbackActivity");
+		
+		HttpGet request = new HttpGet(builder.build().toString());
+		
+		DefaultHttpClient httpClient = new DefaultHttpClient();
+		try {
+		    String result = httpClient.execute(request, new ResponseHandler<String>() {
+		        @Override
+		        public String handleResponse(HttpResponse response)
+		                throws ClientProtocolException, IOException {
+		            
+		            switch (response.getStatusLine().getStatusCode()) {
+		            case HttpStatus.SC_OK:
+		                return EntityUtils.toString(response.getEntity(), "UTF-8");
+		            
+		            case HttpStatus.SC_NOT_FOUND:
+		                throw new RuntimeException("NOT FOUND"); //FIXME
+		                
+		            default:
+		                throw new RuntimeException("UNKOWN ERROR"); //FIXME
+		            }
+
+		        }
+		    });
+
+		    Log.d("loginWithFacebook", result);
+		} catch (ClientProtocolException e) {
+		    throw new RuntimeException(e); //FIXME
+		} catch (IOException e) {
+		    throw new RuntimeException(e); //FIXME
+		} finally {
+		    httpClient.getConnectionManager().shutdown();
+		}
+	}
+}

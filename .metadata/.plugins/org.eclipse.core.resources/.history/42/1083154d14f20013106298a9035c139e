@@ -1,0 +1,17 @@
+package com.tokyoanimation.models;
+
+public class RegisterModel {
+	private String username;
+	private String email;
+	private String password;
+	private String confirm;
+	
+	public RegisterModel(){}
+	public RegisterModel(String username, String email, String password, String confirm){
+		this.username = username;
+		this.email = email;
+		this.password = password;
+		this.confirm = confirm;
+	}
+	
+}

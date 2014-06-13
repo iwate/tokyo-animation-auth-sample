@@ -1,0 +1,13 @@
+package com.tokyoanimation.models;
+
+import com.tokyoanimation.app.R;
+
+import android.app.Activity;
+import android.os.Bundle;
+
+public class CallbackActivity extends Activity {
+	@Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
+}

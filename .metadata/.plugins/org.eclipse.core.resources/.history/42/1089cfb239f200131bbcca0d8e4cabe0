@@ -1,0 +1,26 @@
+package com.tokyoanimation.models;
+
+import android.net.Uri;
+
+public class Client {
+	private final String SCHEME = "http";
+	private final String HOST = "tokyo-animation.azurewebsites.net";
+	private String token;
+	private String tokenType;
+	
+	public Client(){}
+	
+	private void Get(String controller, String action){
+		Uri.Builder builder = new Uri.Builder();
+		builder.scheme(SCHEME);
+		builder.encodedAuthority(HOST);
+	}
+	
+	public void loginWithFacebook(){
+		Uri.Builder builder = new Uri.Builder();
+		builder.scheme(SCHEME);
+		builder.encodedAuthority(HOST);
+		builder.path("/api/account/ExternalLogins");
+		builder.appendQueryParameter("returnUrl", "Callback://CallbackActivity");
+	}
+}
